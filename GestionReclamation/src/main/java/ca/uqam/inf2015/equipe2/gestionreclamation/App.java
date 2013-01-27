@@ -2,7 +2,7 @@ package ca.uqam.inf2015.equipe2.gestionreclamation;
 
 /**
  * Hello world!
- *
+ * 
  */
 public class App 
 {
@@ -11,3 +11,6 @@ public class App
         System.out.println( "Hello World!" );
     }
 }
+
+
+// un p'tit changement pour voir comment on fait un Push!
