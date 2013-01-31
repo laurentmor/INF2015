@@ -34,7 +34,6 @@ public class AppTest
      */
     public void testApp()
     {
-       NumberFormat format=NumberFormat.getCurrencyInstance();
-       format.format("aaa");
+       
     }
 }
