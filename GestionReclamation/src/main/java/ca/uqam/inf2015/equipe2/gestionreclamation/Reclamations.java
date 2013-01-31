@@ -1,15 +1,17 @@
 package ca.uqam.inf2015.equipe2.gestionreclamation;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 
 public class Reclamations {
 
-    private Boolean isReclamationsValid;
-    private Client client;
-    private String moisReclamation;
-    private ArrayList<SoinReclame> listeSoinsReclame;
+    private boolean isReclamationsValid=false;
+    private Client client=null;
+    private String moisReclamation=null;;
+    private ArrayList<SoinReclame> listeSoinsReclame=null;
     
     // Constructor
     public Reclamations(String noClient, String typeContrat, String moisReclamation) {
@@ -48,8 +50,8 @@ public class Reclamations {
         return moisReclamation;
     }
 
-    public ArrayList<SoinReclame> getListeSoinsReclame() {
-        return listeSoinsReclame;
+    public List<SoinReclame> getListeSoinsReclame() {
+        return Collections.unmodifiableList(listeSoinsReclame);
     }
 
 

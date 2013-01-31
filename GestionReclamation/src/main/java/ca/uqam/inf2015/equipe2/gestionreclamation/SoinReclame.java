@@ -1,23 +1,28 @@
 package ca.uqam.inf2015.equipe2.gestionreclamation;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
 public class SoinReclame {
 
-    private String typeSoin;
-    private String dateSoin;
-    private String montantSoinEntrant;
-    private Double montantSoinConverti;
-    private Integer typeSoinConverti;
+    private String typeSoin=null;
+    private String dateSoin=null;
+    private String montantSoinEntrant=null;
+    private Double montantSoinConverti=null;;
+    private Integer typeSoinConverti=null;
     
     
     public SoinReclame(String typeSoin, String dateSoin, String montantSoin)  throws Exception {
         this.typeSoin = typeSoin;
         this.dateSoin = dateSoin;
         this.montantSoinEntrant = montantSoin;
-        
+     
+        //TODO CR-LM Ne pas appeller de méthodes dans le constructeur
+        //Si on créer une classe hériatant de celle ci, modifier les méthodes
+        // pourrait rendre le comportement et rendre l'état de l'objet
+        // Ou faire de la classe une classe finale
         ValiderTypeSoin();
         ValiderMontantSoin();
     }
@@ -64,7 +69,8 @@ public class SoinReclame {
         return number == lower && upper == -1 || number >= lower &&  number <= upper;
     }
     
-    
+    //TODO CR-LM les méthodes doivent toutes débuter par une minuscules
+     
     private void ValiderMontantSoin() throws Exception {
         
             if (isMontantEntrantLastCharacterADollarSign()) {
@@ -74,11 +80,21 @@ public class SoinReclame {
             }
     }
     
-    
-    private Boolean isMontantEntrantLastCharacterADollarSign() {
-        int longueurChaine = montantSoinEntrant.length();
-        String lastChar = montantSoinEntrant.substring(longueurChaine-1, longueurChaine);
-        return lastChar.equals("$");
+    /*TODO CR-LM le typle objet Boolean n'est nécessaire 
+     *que dans les cas de manipulation/convertions 
+     * prendre le type simple pour le reste*/ 
+    private boolean isMontantEntrantLastCharacterADollarSign() {
+       //TODO CR-LM simplification de la méthode de formattage
+        
+        NumberFormat formatter=NumberFormat.getCurrencyInstance();
+        try{
+        formatter.format(montantSoinEntrant);
+         return true;
+        }
+        catch(Exception e){
+        return false;
+        }
+        
     }
 
     

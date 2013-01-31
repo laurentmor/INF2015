@@ -1,5 +1,6 @@
 package ca.uqam.inf2015.equipe2.gestionreclamation;
 
+import java.text.NumberFormat;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -33,6 +34,7 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
+       NumberFormat format=NumberFormat.getCurrencyInstance();
+       format.format("aaa");
     }
 }
