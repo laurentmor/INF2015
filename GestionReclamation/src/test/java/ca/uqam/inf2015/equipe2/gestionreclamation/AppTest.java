@@ -4,6 +4,7 @@ import java.text.NumberFormat;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.apache.commons.validator.routines.LongValidator;
 
 /**
  * Unit test for simple App.
@@ -34,6 +35,11 @@ public class AppTest
      */
     public void testApp()
     {
-       
+        double d=12;
+       LongValidator validator=LongValidator.getInstance();
+       assertFalse(validator.isInRange(d, 13,50));
+       assertTrue(validator.isInRange(d, 9,12));
+       String s=NumberFormat.getCurrencyInstance().format(d);
+       System.out.println(s); 
     }
 }
