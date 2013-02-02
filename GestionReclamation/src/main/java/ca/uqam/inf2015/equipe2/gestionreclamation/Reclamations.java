@@ -70,7 +70,7 @@ public class Reclamations {
 
     public void addNewReclamation(String typeSoin, String dateSoin, String montantSoin) {
         try {
-            SoinReclame soinTemp = new SoinReclame(typeSoin, dateSoin, montantSoin);
+            SoinReclame soinTemp = new SoinReclame(this,typeSoin, dateSoin, montantSoin);
             this.listeSoinsReclame.add(soinTemp);
 
         } catch (Exception e) {

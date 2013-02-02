@@ -54,5 +54,18 @@ public class DateUtil {
         } catch (Exception e) {
           throw e;
         }
+    
+    }
+    
+    public static  boolean areTwoDatesInSameMonth(String date1, String date2){
+    
+    int year1=Integer.parseInt(date1.split("-")[DateDigits.YEAR]);
+    int year2=Integer.parseInt(date2.split("-")[DateDigits.YEAR]);
+    
+    int month1=Integer.parseInt(date1.split("-")[DateDigits.MONTH]);
+    int month2=Integer.parseInt(date2.split("-")[DateDigits.MONTH]);
+     
+     return (month1==month2)&&(year1==year2);
+    
     }
 }

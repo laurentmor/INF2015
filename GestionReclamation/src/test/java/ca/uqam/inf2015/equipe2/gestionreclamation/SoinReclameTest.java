@@ -12,16 +12,19 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
  * @author laurent
  */
-public class SoinReclameTest {
+
+@Ignore public class SoinReclameTest {
   private  static SoinReclame instanceConforme=null;
   private  static SoinReclame instanceMontantIncorrect=null;
   private  static SoinReclame instanceTypeSoinIncorrect=null;
-    public SoinReclameTest() {
+  private  static  Reclamations reclamations=null;
+  public SoinReclameTest() {
     
     }
     
@@ -37,9 +40,10 @@ public class SoinReclameTest {
     @Before
     public void setUp() {
          try {
-            instanceConforme=new SoinReclame("340", "2013-09-09", "123.00$");
-            instanceMontantIncorrect=new SoinReclame("340", "2013-09-09", "xxx.00$");
-            instanceTypeSoinIncorrect=new SoinReclame("1000", "2013-09-09", "123.00$");
+             reclamations=new Reclamations("123456", "A", "2013-09");
+            instanceConforme=new SoinReclame(reclamations,"340", "2013-09-09", "123.00$");
+            instanceMontantIncorrect=new SoinReclame(reclamations,"340", "2013-09-09", "xxx.00$");
+            instanceTypeSoinIncorrect=new SoinReclame(reclamations,"1000", "2013-09-09", "123.00$");
         } catch (Exception ex) {
             Logger.getLogger(SoinReclameTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -96,5 +100,18 @@ public class SoinReclameTest {
     public void testIsValidTypeSoin() {
         System.out.println("isValidTypeSoin");
         assertTrue(instanceConforme.isValidTypeSoin());
+    }
+
+     
+   
+    /**
+     * Test of validerDateDuSoins method, of class SoinReclame.
+     */
+    @Test
+    public void testValiderDateDuSoins() throws Exception {
+        System.out.println("validerDateDuSoins");
+        SoinReclame instance = new SoinReclame(reclamations, "300", "2011-09-09", "200$");
+        assertNull(instance);
+        
     }
 }
