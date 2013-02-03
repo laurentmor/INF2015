@@ -1,5 +1,7 @@
 package ca.uqam.inf2015.equipe2.gestionreclamation;
  
+import org.apache.commons.lang.math.NumberUtils;
+
 
 public class Client {
 
@@ -26,7 +28,7 @@ public class Client {
             throw new Exception("Le numero de client doit avoir une longueur de " + NUMEROCLIENT_LENGHT);
         }
 
-        if (!isNumeric(this.noClient)) {
+        if (!NumberUtils.isDigits(this.noClient)) {
             throw new Exception("Le numero de client doit etre numerique.");
         }
     }
@@ -39,23 +41,12 @@ public class Client {
         }
  
         String validation = "ABCD";
-        if(validation.indexOf(this.typeContrat) == -1) {
+        if(validation.contains(this.typeContrat)) {
             throw new Exception("Le type de contrat doit etre A,B,C,D.");
         }
     }
     
     
-    private boolean isNumeric(String str) {
-        try {
-            Integer.parseInt(str);
-
-        } catch (Exception e) {
-            return false;
-        }
-
-        return true;
-    }
-
     
     public String getNoClient() {
         return noClient;
