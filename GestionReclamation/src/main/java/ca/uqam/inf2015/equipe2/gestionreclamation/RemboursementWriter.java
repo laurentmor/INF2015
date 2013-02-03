@@ -31,7 +31,8 @@ public class RemboursementWriter {
     }
     
     public void createRemboursement(Arraylist<String> reclamations) {
-        Element lesRembousrements = outputDocument.createElement("remboursements");
+        Element lesRembousrements = 
+                outputDocument.createElement("remboursements");
         Element unClient = outputDocument.createElement("client");
         Element moisRemboursement = outputDocument.createElement("mois");
         outputDocument.getDocumentElement().appendChild(lesRembousrements);
@@ -43,7 +44,8 @@ public class RemboursementWriter {
 
     
     
-    private void parseDocument(String pathToDocument) throws ParserConfigurationException, SAXException, IOException {
+    private void parseDocument(String pathToDocument) 
+            throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory builderFactory = init();
         DocumentBuilder builder = builderFactory.newDocumentBuilder();
         outputDocument = builder.parse(pathToDocument);
@@ -51,16 +53,19 @@ public class RemboursementWriter {
 
     //Design Pattern Singleton - Un seul Object.
     private DocumentBuilderFactory init() {
-        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilderFactory builderFactory = 
+                DocumentBuilderFactory.newInstance();
         return builderFactory;
     }
     
-    public void saveFile(String pathToFile) throws TransformerConfigurationException, TransformerException {
+    public void saveFile(String pathToFile) 
+            throws TransformerConfigurationException, TransformerException {
         Source domSource = new DOMSource(outputDocument);
         File file = new File(pathToFile);
         Result result = new StreamResult(file);
 
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        Transformer transformer = 
+                TransformerFactory.newInstance().newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.transform(domSource, result);
     }
