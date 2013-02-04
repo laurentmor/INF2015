@@ -1,30 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ca.uqam.inf2015.equipe2.gestionreclamation;
 
 import org.apache.commons.validator.routines.LongValidator;
 
-/**
- *
- * @author laurent
- */
+
+
 public class CalculateurRemboursement {
 
     int typeSoin = 0;
     double montant = 0;
-    private static CalculateurRemboursement instance = null;
+//    private static CalculateurRemboursement instance = null;
 
-    private CalculateurRemboursement() {
+    public CalculateurRemboursement() {
     }
 
-    public static CalculateurRemboursement getInstance() {
-        if (instance == null) {
-            instance = new CalculateurRemboursement();
-        }
-        return instance;
-    }
+//    public static CalculateurRemboursement getInstance() {
+//        if (instance == null) {
+//            instance = new CalculateurRemboursement();
+//        }
+//        return instance;
+//    }
 
     public double calculer(String typeContrat, SoinReclame soin) {
         typeSoin = soin.getTypeSoinConverti();

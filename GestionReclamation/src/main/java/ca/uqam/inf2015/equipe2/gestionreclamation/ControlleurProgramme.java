@@ -16,8 +16,7 @@ public class ControlleurProgramme {
         try {
             reclamationReader = new ReclamationReader(inputFileName);
             remboursementWriter = new RemboursementWriter(outputFileName);
-//            calculateurRemboursement = new CalculateurRemboursement();
-
+            calculateurRemboursement = new CalculateurRemboursement();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -35,17 +34,19 @@ public class ControlleurProgramme {
         PreparationDesRemboursements();
  
         for (SoinReclame s : this.reclamations.getListeSoinsReclame()) {
-            Double montantRemboursement = enginRegle.CalculerMontantRemboursement(s.getTypeSoinConverti(), client.getTypeContrat(), s.getMontantSoinConverti());
+//            Double montantRemboursement = enginRegle.CalculerMontantRemboursement(s.getTypeSoinConverti(), client.getTypeContrat(), s.getMontantSoinConverti());
+            Double montantRemboursement = calculateurRemboursement.calculer(client.getTypeContrat(), s);
+
             remboursements.addNewRemboursement(s.getTypeSoinConverti(), s.getDateSoin(), montantRemboursement);
         }
 
-        this.remboursementsWriter.SaveRemboursementsOnDisk();
+        this.remboursementWriter.SaveRemboursementsOnDisk();
     }
 
     public void PreparationDesRemboursements() {
-        reclamations = reclamationsReader.getReclamations();
+        reclamations = reclamationReader.getReclamations();
         client = reclamations.getClient();
         remboursements = new Remboursements(client, reclamations.getMoisReclamation());
-        remboursementsWriter.setRemboursement(remboursements);
+        remboursementWriter.setRemboursement(remboursements);
     }
 }
