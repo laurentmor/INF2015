@@ -5,7 +5,7 @@ import org.apache.commons.lang.math.NumberUtils;
 
 public class Client {
 
-    public static final int NUMEROCLIENT_LENGHT = 6;
+    private static final int NUMEROCLIENT_LENGHT = 6;
 
     private String noClient;
     private String typeContrat;
