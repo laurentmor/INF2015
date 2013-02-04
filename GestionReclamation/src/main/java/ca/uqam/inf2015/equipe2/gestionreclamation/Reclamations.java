@@ -24,7 +24,6 @@ public final class Reclamations {
 
         } catch (Exception e) {
             this.isReclamationsValid = false;
-//            System.out.println(e.getMessage());
         }
 
         this.moisReclamation = moisReclamation;

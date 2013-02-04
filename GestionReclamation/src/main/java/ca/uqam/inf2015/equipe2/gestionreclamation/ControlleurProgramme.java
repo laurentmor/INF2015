@@ -1,11 +1,11 @@
-package ca.uqam.inf2015.equipe2.gestionreclamation;;
+package ca.uqam.inf2015.equipe2.gestionreclamation;
 
 
 public class ControlleurProgramme {
 
-    ReclamationsReader reclamationsReader;
-    RemboursementsWriter remboursementsWriter;
-    EnginRegle enginRegle;
+    ReclamationReader reclamationReader;
+    RemboursementWriter remboursementWriter;
+    CalculateurRemboursement calculateurRemboursement;
     Reclamations reclamations;
     Remboursements remboursements;
     String inputFileName;
@@ -14,9 +14,9 @@ public class ControlleurProgramme {
 
     public ControlleurProgramme(String inputFileName, String outputFileName) {
         try {
-            reclamationsReader = new ReclamationsReader(inputFileName);
-            remboursementsWriter = new RemboursementsWriter(outputFileName);
-            enginRegle = new EnginRegle();
+            reclamationReader = new ReclamationReader(inputFileName);
+            remboursementWriter = new RemboursementWriter(outputFileName);
+//            calculateurRemboursement = new CalculateurRemboursement();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -25,14 +25,15 @@ public class ControlleurProgramme {
 
     public void Run() throws Exception {
         
-//        reclamationsReader.DisplayAllReclamations();
+//        reclamationReader.DisplayAllReclamations();
+        reclamations = reclamationReader.getReclamations();
         
-        if (!reclamationsReader.isDocumentValid()) {
-            this.remboursementsWriter.SaveDonneInvalideOnDisk();
+        if (!reclamations.isReclamationsValid()) {
+            this.remboursementWriter.SaveDonneInvalideOnDisk();
             return;
         }
         PreparationDesRemboursements();
-
+ 
         for (SoinReclame s : this.reclamations.getListeSoinsReclame()) {
             Double montantRemboursement = enginRegle.CalculerMontantRemboursement(s.getTypeSoinConverti(), client.getTypeContrat(), s.getMontantSoinConverti());
             remboursements.addNewRemboursement(s.getTypeSoinConverti(), s.getDateSoin(), montantRemboursement);

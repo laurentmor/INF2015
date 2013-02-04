@@ -1,4 +1,4 @@
-package inf2015;
+package ca.uqam.inf2015.equipe2.gestionreclamation;
 
 import java.text.DecimalFormat;
 

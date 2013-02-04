@@ -86,6 +86,11 @@ public final class ReclamationReader {
     }
 
     
+    public Reclamations getReclamations() {
+        return this.reclamations;
+    }
+
+    
     /**
      * Affiche toutes réclamations à la console. Utilisé comme outil de
      * validation/troubleshooting.

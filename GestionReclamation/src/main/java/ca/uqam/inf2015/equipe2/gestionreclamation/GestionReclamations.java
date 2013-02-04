@@ -28,18 +28,19 @@ public class GestionReclamations {
 //          ControlleurProgramme prg = new ControlleurProgramme(inputFileName, outputFileName);
 //          prg.Run();
 
-            ReclamationReader reclamationReader = new ReclamationReader(inputFileName);
-            reclamationReader.DisplayAllReclamations();
-//            Client client = new Client("100323", "A");
-//            Remboursements rem = new Remboursements(client, "2013-01");
+//            ReclamationReader reclamationReader = new ReclamationReader(inputFileName);
+//            reclamationReader.DisplayAllReclamations();
+            Client client = new Client("100323", "A");
+            Remboursements rem = new Remboursements(client, "2013-01");
             
-//            rem.addNewRemboursement(100, "2013-01-11", 58.50);
-//            rem.addNewRemboursement(200, "2013-01-13", 22.50);
-//            rem.addNewRemboursement(334, "2013-01-23", 0.0);
+            rem.addNewRemboursement(100, "2013-01-11", 58.50);
+            rem.addNewRemboursement(200, "2013-01-13", 22.50);
+            rem.addNewRemboursement(334, "2013-01-23", 0.0);
             
-//            RemboursementWriter rw = new RemboursementWriter("output.xml", rem);
-//            rw.SaveRemboursementsOnDisk();
-            
+            RemboursementWriter rw = new RemboursementWriter("output.xml");
+            rw.setRemboursement(rem);
+            rw.SaveRemboursementsOnDisk();
+//            rw.SaveDonneInvalideOnDisk();
             
             System.out.println("Fin!");
         } catch (Exception e) {
