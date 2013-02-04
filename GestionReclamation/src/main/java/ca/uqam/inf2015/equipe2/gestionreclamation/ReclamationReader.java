@@ -1,46 +1,65 @@
 package ca.uqam.inf2015.equipe2.gestionreclamation;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
-public class ReclamationReader {
-    Document inputDocument;
+
+public final class ReclamationReader {
+
+    private Document inputDocument;
     
-    public ReclamationReader (String inputFileName) 
-            throws ParserConfigurationException, SAXException, IOException {
-        parseDocument(inputFileName);
+    private String numeroClient;
+    private String typeContrat;
+    private String moisReclamation;
+
+    private ArrayList<String> lesSoins;
+    private ArrayList<String> lesDates;
+    private ArrayList<String> lesMontants;
+    
+    private Reclamations reclamations;
+    
+    
+
+    public ReclamationReader(String inputFileName) throws Exception {
+        
+        parseXmlDocument(inputFileName);
+        
+        LoadReclamationsData();
     }
+
+
+        private void LoadReclamationsData() {
+        
+        this.numeroClient = loadElementFromDocumentByTag("client");
+        this.typeContrat = loadElementFromDocumentByTag("contrat");
+        this.moisReclamation = loadElementFromDocumentByTag("mois");
+
+        reclamations = new Reclamations(numeroClient, typeContrat, moisReclamation);
+
+        this.lesSoins = loadArrayListElementsFromDocumentByTag("soin");
+        this.lesDates = loadArrayListElementsFromDocumentByTag("date");
+        this.lesMontants = loadArrayListElementsFromDocumentByTag("montant");
+        
+        for (int i = 0; i < lesSoins.size(); i++) {
+            reclamations.addNewReclamation(lesSoins.get(i), lesDates.get(i), lesMontants.get(i));
+        }
+        
+    }
+
     
-    private void parseDocument(String inputFileName) 
-            throws ParserConfigurationException, SAXException, IOException{
-        DocumentBuilderFactory builderFactory = init();
+    
+    
+    private void parseXmlDocument(String inputFileName) throws Exception {
+        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = builderFactory.newDocumentBuilder();
         inputDocument = builder.parse(inputFileName);
     }
-    
-    private DocumentBuilderFactory init(){
-        DocumentBuilderFactory builderFactory = 
-                DocumentBuilderFactory.newInstance();
-        return builderFactory;
-    }
-    
+
+
     private String loadElementFromDocumentByTag(String inputFileName) {
         NodeList nodes = inputDocument.getElementsByTagName(inputFileName);
 
@@ -53,8 +72,7 @@ public class ReclamationReader {
     }
 
     
-    private ArrayList<String> loadArrayListElementsFromDocumentByTag
-            (String inputFileName) {
+    private ArrayList<String> loadArrayListElementsFromDocumentByTag(String inputFileName) {
         ArrayList<String> retour = new ArrayList();
         NodeList nodes = inputDocument.getElementsByTagName(inputFileName);
 
@@ -66,7 +84,23 @@ public class ReclamationReader {
 
         return retour;
     }
+
     
+    /**
+     * Affiche toutes réclamations à la console. Utilisé comme outil de
+     * validation/troubleshooting.
+     */
+    public void DisplayAllReclamations() {
+        System.out.println("Document Valide: " + this.reclamations.isReclamationsValid());
+        System.out.println("Numero de client: " + this.numeroClient);
+        System.out.println("Type de Contrat : " + this.typeContrat);
+        System.out.println("Mois Reclamation: " + this.moisReclamation);
+
+        for (int i = 0; i < lesSoins.size(); i++) {
+            System.out.println("Type de soin: " + this.lesSoins.get(i).toString());
+            System.out.println("Date        : " + this.lesDates.get(i));
+            System.out.println("Montant     : " + this.lesMontants.get(i).toString());
+        }
+    }
     
 }
-

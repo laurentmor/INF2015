@@ -1,20 +1,16 @@
 package ca.uqam.inf2015.equipe2.gestionreclamation;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class Reclamations {
+public final class Reclamations {
 
     private boolean isReclamationsValid = false;
     private Client client = null;
     private String moisReclamation = null;
-    ;
     private ArrayList<SoinReclame> listeSoinsReclame = null;
 
     // Constructor
@@ -28,9 +24,8 @@ public class Reclamations {
 
         } catch (Exception e) {
             this.isReclamationsValid = false;
-            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
         }
-
 
         this.moisReclamation = moisReclamation;
         ValiderMois();
@@ -44,9 +39,9 @@ public class Reclamations {
             SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM");
             dateFormat.setCalendar(gc);
             dateFormat.setLenient(false);
-            isReclamationsValid=true;
+
         } catch (Exception ex) {
-          isReclamationsValid=false;
+            isReclamationsValid=false;
         }
       
       

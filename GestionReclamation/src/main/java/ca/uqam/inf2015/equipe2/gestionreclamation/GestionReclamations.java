@@ -25,11 +25,11 @@ public class GestionReclamations {
         outputFileName = args[1];
 
         try {
-          Management prg = new Management(inputFileName, outputFileName);
-          prg.Run();
+//          ControlleurProgramme prg = new ControlleurProgramme(inputFileName, outputFileName);
+//          prg.Run();
 
-//            ReclamationsReader reclamationsReader = new ReclamationsReader(inputFileName);
-//            reclamationsReader.DisplayAllReclamations();
+            ReclamationReader reclamationReader = new ReclamationReader(inputFileName);
+            reclamationReader.DisplayAllReclamations();
 //            Client client = new Client("100323", "A");
 //            Remboursements rem = new Remboursements(client, "2013-01");
             

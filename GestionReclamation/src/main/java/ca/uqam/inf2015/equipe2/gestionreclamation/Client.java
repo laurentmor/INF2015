@@ -17,12 +17,12 @@ public class Client {
         this.noClient = noClient;
         this.typeContrat = typeContrat;
         
-        ValidateNoClient();
-        ValidateTypeContrat();
+        validateNoClient();
+        validateTypeContrat();
     }
 
     
-    private void ValidateNoClient() throws Exception {
+    private void validateNoClient() throws Exception {
 
         if (this.noClient.length() != NUMEROCLIENT_LENGHT) {
             throw new Exception("Le numero de client doit avoir une longueur de " + NUMEROCLIENT_LENGHT);
@@ -34,14 +34,14 @@ public class Client {
     }
 
     
-    private void ValidateTypeContrat() throws Exception {
+    private void validateTypeContrat() throws Exception {
 
         if (this.typeContrat.length() != 1) {
             throw new Exception("Le type de contrat doit etre une lettre.");
         }
  
         String validation = "ABCD";
-        if(validation.contains(this.typeContrat)) {
+        if(!validation.contains(this.typeContrat)) {
             throw new Exception("Le type de contrat doit etre A,B,C,D.");
         }
     }
