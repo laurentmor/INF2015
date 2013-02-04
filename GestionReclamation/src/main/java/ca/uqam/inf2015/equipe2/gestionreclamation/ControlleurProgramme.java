@@ -12,14 +12,10 @@ public class ControlleurProgramme {
     String outputFileName;
     Client client;
 
-    public ControlleurProgramme(String inputFileName, String outputFileName) {
-        try {
-            reclamationReader = new ReclamationReader(inputFileName);
-            remboursementWriter = new RemboursementWriter(outputFileName);
-            calculateurRemboursement = new CalculateurRemboursement();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public ControlleurProgramme(String inputFileName, String outputFileName) throws Exception {
+        reclamationReader = new ReclamationReader(inputFileName);
+        remboursementWriter = new RemboursementWriter(outputFileName);
+        calculateurRemboursement = new CalculateurRemboursement();
     }
 
     public void Run() throws Exception {

@@ -1,5 +1,6 @@
 package ca.uqam.inf2015.equipe2.gestionreclamation;
 
+import java.io.File;
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -7,33 +8,28 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-
 public final class ReclamationReader {
 
     private Document inputDocument;
-    
     private String numeroClient;
     private String typeContrat;
     private String moisReclamation;
-
     private ArrayList<String> lesSoins;
     private ArrayList<String> lesDates;
     private ArrayList<String> lesMontants;
-    
     private Reclamations reclamations;
-    
-    
 
     public ReclamationReader(String inputFileName) throws Exception {
-        
+
+        ValidateInputFileName(inputFileName);
+
         parseXmlDocument(inputFileName);
-        
+
         LoadReclamationsData();
     }
 
+    private void LoadReclamationsData() {
 
-        private void LoadReclamationsData() {
-        
         this.numeroClient = loadElementFromDocumentByTag("client");
         this.typeContrat = loadElementFromDocumentByTag("contrat");
         this.moisReclamation = loadElementFromDocumentByTag("mois");
@@ -43,22 +39,18 @@ public final class ReclamationReader {
         this.lesSoins = loadArrayListElementsFromDocumentByTag("soin");
         this.lesDates = loadArrayListElementsFromDocumentByTag("date");
         this.lesMontants = loadArrayListElementsFromDocumentByTag("montant");
-        
+
         for (int i = 0; i < lesSoins.size(); i++) {
             reclamations.addNewReclamation(lesSoins.get(i), lesDates.get(i), lesMontants.get(i));
         }
-        
+
     }
 
-    
-    
-    
     private void parseXmlDocument(String inputFileName) throws Exception {
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = builderFactory.newDocumentBuilder();
         inputDocument = builder.parse(inputFileName);
     }
-
 
     private String loadElementFromDocumentByTag(String inputFileName) {
         NodeList nodes = inputDocument.getElementsByTagName(inputFileName);
@@ -71,7 +63,6 @@ public final class ReclamationReader {
         return reclamationItem.getTextContent();
     }
 
-    
     private ArrayList<String> loadArrayListElementsFromDocumentByTag(String inputFileName) {
         ArrayList<String> retour = new ArrayList();
         NodeList nodes = inputDocument.getElementsByTagName(inputFileName);
@@ -85,12 +76,10 @@ public final class ReclamationReader {
         return retour;
     }
 
-    
     public Reclamations getReclamations() {
         return this.reclamations;
     }
 
-    
     /**
      * Affiche toutes réclamations à la console. Utilisé comme outil de
      * validation/troubleshooting.
@@ -107,5 +96,12 @@ public final class ReclamationReader {
             System.out.println("Montant     : " + this.lesMontants.get(i).toString());
         }
     }
-    
+
+    private void ValidateInputFileName(String inputFileName) throws Exception {
+        File f = new File(inputFileName);
+
+        if (!f.isFile()) {
+            throw new RuntimeException("Fichier d'entrée invalide");
+        }
+    }
 }
