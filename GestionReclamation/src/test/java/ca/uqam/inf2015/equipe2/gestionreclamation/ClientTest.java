@@ -11,10 +11,10 @@ import org.junit.Test;
 //TODO Test du constructeur avec les erreurs possible
 
 
-
 public class ClientTest {
     
-    Client client;
+    Client clientBon;
+    Client clientBad;
     
     
     public ClientTest() {
@@ -31,32 +31,64 @@ public class ClientTest {
     @Before
     public void setUp() {
         try {
-            client = new Client("111111", "A");
+            clientBon = new Client("123456", "A");
         } catch(Exception e) {
-            fail(e.getMessage());
+            fail("Le bon constructeur retourne une erreur!");
         }
     }
     
     @After
     public void tearDown() {
-        client = null;
+        clientBon = null;
+        clientBad = null;
     }
 
 
     
     @Test
-    public void testGetNoClient() {
-        System.out.println("getNoClient");
+    public void testConstructeurNoClientMauvaisNbreDigit() {
 
-        assertEquals("111111", client.getNoClient());
+        try {
+            clientBon = new Client("12345", "A");
+            fail("NoClient pas 6 digit donne pas d'erreur.");
+        } catch(Exception e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testConstructeurNoClientPasTouteDigit() {
+
+        try {
+            clientBon = new Client("12345A", "A");
+            fail("NoClient pas toute en digit donne pas d'erreur.");
+        } catch(Exception e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testConstructeurMauvaisTypeContrat() {
+
+        try {
+            clientBon = new Client("123456", "E");
+            fail("Mauvais contrat donne pas d'erreur.");
+        } catch(Exception e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testGetNoClient() {
+
+        assertEquals("123456", clientBon.getNoClient());
     }
 
 
     @Test
     public void testGetTypeContrat() {
-        System.out.println("getTypeContrat");
 
-        assertEquals("A", client.getTypeContrat());
+        assertEquals("A", clientBon.getTypeContrat());
     }
 }
 

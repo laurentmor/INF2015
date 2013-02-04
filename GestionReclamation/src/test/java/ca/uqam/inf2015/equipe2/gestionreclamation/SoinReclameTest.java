@@ -1,36 +1,28 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ca.uqam.inf2015.equipe2.gestionreclamation;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.Ignore;
 
-/**
- *
- * @author laurent
- */
 
-@Ignore public class SoinReclameTest {
-  private  static SoinReclame instanceConforme=null;
-  private  static SoinReclame instanceMontantIncorrect=null;
-  private  static SoinReclame instanceTypeSoinIncorrect=null;
-  private  static  Reclamations reclamations=null;
-  public SoinReclameTest() {
+
+
+public class SoinReclameTest {
     
+    SoinReclame soinReclameBon1;
+    SoinReclame soinReclameBon2;
+    SoinReclame soinReclameBon3;
+    SoinReclame soinReclameBad;
+    
+    
+    public SoinReclameTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-       
     }
     
     @AfterClass
@@ -39,79 +31,96 @@ import org.junit.Ignore;
     
     @Before
     public void setUp() {
-         try {
-             reclamations=new Reclamations("123456", "A", "2013-09");
-            instanceConforme=new SoinReclame(reclamations,"340", "2013-09-09", "123.00$");
-            instanceMontantIncorrect=new SoinReclame(reclamations,"340", "2013-09-09", "xxx.00$");
-            instanceTypeSoinIncorrect=new SoinReclame(reclamations,"1000", "2013-09-09", "123.00$");
-        } catch (Exception ex) {
-            Logger.getLogger(SoinReclameTest.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            soinReclameBon1 = new SoinReclame("2013-01","0","2013-01-11","234.00$");
+            soinReclameBon2 = new SoinReclame("2008-02","300","2008-02-29","234.00$");
+            soinReclameBon3 = new SoinReclame("2013-01","399","2013-01-11","234.00$");
+        } catch(Exception e) {
+            fail("Un bon contructeur doit pas retourner d'erreur");
         }
-     
     }
     
     @After
     public void tearDown() {
+        soinReclameBon1 = null;
+        soinReclameBon2 = null;
+        soinReclameBon3 = null;
+        soinReclameBad = null;
     }
 
-    /**
-     * Test of getDateSoin method, of class SoinReclame.
-     */
+    
+     
+    @Test
+    public void testConstructeurTypeDeSoin800() {
+        
+        try {
+            soinReclameBad = new SoinReclame("2013-01","800","2013-01-11","234.00$");
+            fail("Un mauvais type de soin devrait donner un erreur.");
+        } catch(Exception e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testConstructeurMontantSansDollars() {
+        
+        try {
+            soinReclameBad = new SoinReclame("2013-01","399","2013-01-11","234.00");
+            fail("Montant sans le $ devrait donner un erreur.");
+        } catch(Exception e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testConstructeurMontantInvalide() {
+        
+        try {
+            soinReclameBad = new SoinReclame("2013-01","399","2013-01-11","23A.00$");
+            fail("Montant invalide devrait donner un erreur.");
+        } catch(Exception e) {
+            assertTrue(true);
+        }
+    }
+    
+    @Test
+    public void testConstructeurDateEtMoisDifferent() {
+        
+        try {
+            soinReclameBad = new SoinReclame("2013-01","399","2012-01-11","23A.00$");
+            fail("La date et le mois different devrait donner un erreur.");
+        } catch(Exception e) {
+            assertTrue(true);
+        }
+    }
+
+    
     @Test
     public void testGetDateSoin() {
-        System.out.println("getDateSoin");
-       
         
-        String expResult = "2013-09-09";
-        String result = instanceConforme.getDateSoin();
-        assertEquals(expResult, result);
-        
+        assertEquals("2013-01-11", soinReclameBon1.getDateSoin());
+        assertEquals("2008-02-29", soinReclameBon2.getDateSoin()); //test annee bisextile
+
     }
 
-    /**
-     * Test of getMontantSoinConverti method, of class SoinReclame.
-     */
+    
     @Test
     public void testGetMontantSoinConverti() {
-        System.out.println("getMontantSoinConverti");
         
-        double expResult = 123;
-        double result = instanceConforme.getMontantSoinConverti();
-        assertEquals(expResult, result, 0.0);
-        
+        assertEquals(234.00, soinReclameBon1.getMontantSoinConverti(), 0);
     }
-
-    /**
-     * Test of getTypeSoinConverti method, of class SoinReclame.
-     */
+     
+    
     @Test
     public void testGetTypeSoinConverti() {
-        System.out.println("getTypeSoinConverti");
-        int expResult = 340;
-        int result = instanceConforme.getTypeSoinConverti();
-        assertEquals(expResult, result);
         
-    }
-
-    /**
-     * Test of isValidTypeSoin method, of class SoinReclame.
-     */
-    @Test
-    public void testIsValidTypeSoin() {
-        System.out.println("isValidTypeSoin");
-        assertTrue(instanceConforme.isValidTypeSoin());
-    }
-
-     
-   
-    /**
-     * Test of validerDateDuSoins method, of class SoinReclame.
-     */
-    @Test
-    public void testValiderDateDuSoins() throws Exception {
-        System.out.println("validerDateDuSoins");
-        SoinReclame instance = new SoinReclame(reclamations, "300", "2011-09-09", "200$");
-        assertNull(instance);
+        assertEquals(0, soinReclameBon1.getTypeSoinConverti());
+        assertEquals(300, soinReclameBon2.getTypeSoinConverti());
+        assertEquals(399, soinReclameBon3.getTypeSoinConverti());
         
     }
 }
+
+
+
+
