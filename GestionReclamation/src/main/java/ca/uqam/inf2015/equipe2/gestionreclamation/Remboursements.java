@@ -14,7 +14,7 @@ public class Remboursements {
     public Remboursements(Client client, String moisRembourssement) {
         this.client = client;
         this.moisRemboursement = moisRembourssement;
-        listeSoinsRembourse = new ArrayList<>();
+        listeSoinsRembourse = new ArrayList<SoinRembourse>();
     }
 
     

@@ -62,11 +62,11 @@ public class SoinRembourseTest {
      * Test of getMontantRembourseFormate method, of class SoinRembourse.
      */
 
-   //@Test
-    public void _testGetMontantRembourseFormate() {
+   @Test
+    public void testGetMontantRembourseFormate() {
         System.out.println("getMontantRembourseFormate");
 
-        assertEquals("111,11$", soinRembourse1.getMontantRembourseFormate());
-        assertEquals("0,00$", soinRembourse2.getMontantRembourseFormate());
+        assertEquals("111.11$", soinRembourse1.getMontantRembourseFormate());
+        assertEquals("0.00$", soinRembourse2.getMontantRembourseFormate());
     }
 }

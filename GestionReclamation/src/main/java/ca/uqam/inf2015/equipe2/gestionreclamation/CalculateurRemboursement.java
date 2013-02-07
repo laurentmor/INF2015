@@ -23,18 +23,21 @@ public class CalculateurRemboursement {
     public double calculer(String typeContrat, SoinReclame soin) {
         typeSoin = soin.getTypeSoinConverti();
         montant = soin.getMontantSoinConverti();
-        switch (typeContrat) {
-            case "A":
-                return caculerPourContratA();
-            case "B":
-                return caculerPourContratB();
-            case "C":
-                return caculerPourContratC();
-            case "D":
-                return caculerPourContratD();
-            default:
-                return 0;
+        
+        if("A".equals(typeContrat)) {
+            return caculerPourContratA();
         }
+        if("B".equals(typeContrat)) {
+            return caculerPourContratB();
+        }
+        if("C".equals(typeContrat)) {
+            return caculerPourContratC();
+        }
+        if("D".equals(typeContrat)) {
+            return caculerPourContratD();
+        }
+        
+        return 0;
     }
 
     double caculerPourContratA() {

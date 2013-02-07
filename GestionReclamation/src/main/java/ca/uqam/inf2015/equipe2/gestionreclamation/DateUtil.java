@@ -45,14 +45,14 @@ public class DateUtil {
      * @param pdate La date au format YYY-MM--DD
      * @return une instance de Gregoriancalendar correspondant à la date fournie
      */
-    public static GregorianCalendar getParsedDate(String pdate)throws ParseException{
+    public static GregorianCalendar getParsedDate(String pdate)throws Exception{
         String[] dateElms = pdate.split("-");
         try {
             return new GregorianCalendar(Integer.parseInt(dateElms[DateDigits.YEAR]), 
                     Integer.parseInt(dateElms[DateDigits.MONTH]), 
                     Integer.parseInt(dateElms[DateDigits.DAY]));
         } catch (Exception e) {
-          throw e;
+        return null;
         }
     
     }

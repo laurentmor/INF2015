@@ -15,7 +15,7 @@ public final class Reclamations {
 
     // Constructor
     public Reclamations(String noClient, String typeContrat, String moisReclamation) {
-        listeSoinsReclame = new ArrayList<>();
+        listeSoinsReclame = new ArrayList<SoinReclame>();
         client = null;
 
         try {
@@ -69,6 +69,7 @@ public final class Reclamations {
 
         } catch (Exception e) {
             this.isReclamationsValid = false;
+            e.printStackTrace();
         }
     }
 }

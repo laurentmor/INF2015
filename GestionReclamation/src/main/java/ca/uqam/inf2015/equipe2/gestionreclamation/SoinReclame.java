@@ -1,5 +1,6 @@
 package ca.uqam.inf2015.equipe2.gestionreclamation;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import org.apache.commons.validator.routines.LongValidator;
 
@@ -63,8 +64,10 @@ public final class SoinReclame {
 
         try {
             montantSoinConverti = Double.parseDouble(montantSoinEntrant);
-            NumberFormat.getCurrencyInstance().format(montantSoinConverti);
+            montantSoinEntrant = new DecimalFormat("0.00$").format(montantSoinConverti).toString().replace(',', '.');
+            System.out.println("SoinReclame "+montantSoinEntrant);
         } catch (Exception e) {
+            
             throw new Exception("Le montant est invalide.");
         }
 
