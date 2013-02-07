@@ -21,7 +21,7 @@ public class SoinRembourse {
         //Donc, on court-circuite le problème en forçant le '.'
         
         montantRembourseFormate = new DecimalFormat("0.00$").format(montantRembourse).toString().replace(',', '.');
-      System.out.println("SoinRembourse:"+montantRembourseFormate);
+   
     }
 
     

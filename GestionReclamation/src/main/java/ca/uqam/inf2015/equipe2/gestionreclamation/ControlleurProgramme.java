@@ -1,5 +1,8 @@
 package ca.uqam.inf2015.equipe2.gestionreclamation;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class ControlleurProgramme {
 
@@ -18,13 +21,17 @@ public class ControlleurProgramme {
         calculateurRemboursement = new CalculateurRemboursement();
     }
 
-    public void Run() throws Exception {
+    public void Run()  {
         
 //        reclamationReader.DisplayAllReclamations();
         reclamations = reclamationReader.getReclamations();
         
         if (!reclamations.isReclamationsValid()) {
-            this.remboursementWriter.SaveDonneInvalideOnDisk();
+            try {
+                this.remboursementWriter.SaveDonneInvalideOnDisk();
+            } catch (Exception ex) {
+                Logger.getLogger(ControlleurProgramme.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return;
         }
         PreparationDesRemboursements();
@@ -35,8 +42,11 @@ public class ControlleurProgramme {
 
             remboursements.addNewRemboursement(s.getTypeSoinConverti(), s.getDateSoin(), montantRemboursement);
         }
-
-        this.remboursementWriter.SaveRemboursementsOnDisk();
+        try {
+            this.remboursementWriter.SaveRemboursementsOnDisk();
+        } catch (Exception ex) {
+            Logger.getLogger(ControlleurProgramme.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void PreparationDesRemboursements() {

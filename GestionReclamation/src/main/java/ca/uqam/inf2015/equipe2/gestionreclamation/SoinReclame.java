@@ -65,7 +65,7 @@ public final class SoinReclame {
         try {
             montantSoinConverti = Double.parseDouble(montantSoinEntrant);
             montantSoinEntrant = new DecimalFormat("0.00$").format(montantSoinConverti).toString().replace(',', '.');
-            System.out.println("SoinReclame "+montantSoinEntrant);
+         
         } catch (Exception e) {
             
             throw new Exception("Le montant est invalide.");
