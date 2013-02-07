@@ -18,7 +18,7 @@ public class Remboursements {
     }
 
     
-    public void addNewRemboursement(Integer typeSoin, String dateSoin, Double montantRembourse) {
+    public void addNewRemboursement(int typeSoin, String dateSoin, double montantRembourse) {
         SoinRembourse remboussementTemp = new SoinRembourse(typeSoin, dateSoin, montantRembourse);
         this.listeSoinsRembourse.add(remboussementTemp);
     }

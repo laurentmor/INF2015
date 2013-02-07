@@ -6,10 +6,10 @@ package ca.uqam.inf2015.equipe2.gestionreclamation;
  */
 public class App 
 {
-    public static void main( String[] args )
+   /* public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
-    }
+    }*/
 }
 
 

@@ -1,36 +1,31 @@
 package ca.uqam.inf2015.equipe2.gestionreclamation;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class SoinRembourse {
 
-    Integer typeSoin;
+    int typeSoin;
     String date;
-    Double montantRembourse;
-
+    double montantRembourse;
     String montantRembourseFormate;
 
-    
-    
-    public SoinRembourse(Integer typeSoin, String date, Double montantRembourse) {
+    public SoinRembourse(int typeSoin, String date, double montantRembourse) {
         this.typeSoin = typeSoin;
         this.date = date;
         this.montantRembourse = montantRembourse;
-        
-        montantRembourseFormate = new DecimalFormat("0.00$").format(montantRembourse).toString();
+
+        montantRembourseFormate = NumberFormat.getCurrencyInstance().format(montantRembourse);
     }
 
-    
     public String getTypeSoin() {
-        return typeSoin.toString();
+        return Integer.toString(typeSoin);
     }
 
-    
     public String getDate() {
         return date;
     }
 
-    
     public String getMontantRembourseFormate() {
         return montantRembourseFormate;
     }
